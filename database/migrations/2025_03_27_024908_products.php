@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->integer('id', 10)->unsigned()->primary()->notNullable(); 
-            $table->string('name', 100)->nullable(); 
-            $table->unsignedInteger('id_type')->nullable();
+            $table->string('name', 100)->nullable();
             $table->text('description')->nullable(); 
             $table->float('unit_price')->nullable(); 
             $table->float('promotion_price')->nullable();

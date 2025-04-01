@@ -10,8 +10,6 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductCollection;
 use App\Filters\ProductFilter;
 use App\Http\Requests\StoreProductRequest;
-// dd(auth()->user());
-// dd(request()->header('Authorization'));
 
 
 class ProductController extends Controller
@@ -52,10 +50,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if (request()->query('includeInvoices')) {
-            $product->load('invoices');
-        }
-        
         return new ProductResource($product);
     }
 
@@ -73,7 +67,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
+        return $product->update($request->all());
     }
 
     /**

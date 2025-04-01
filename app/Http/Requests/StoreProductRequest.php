@@ -25,7 +25,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'unitPrice' => 'required|numeric|min:0',
-            'promotionPrice' => 'nullable|numeric|min:0|lt:unit_price',
+            'promotionPrice' => 'numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'unit' => 'required|string|max:50',
             'new' => 'required|boolean'
@@ -34,8 +34,8 @@ class StoreProductRequest extends FormRequest
 
     public function prepareForValidation() {
         $this->merge([
-            'unit_price' => 'unitPrice',
-            'promotion_price' => 'promotionPrice'
+            'unit_price' => $this->unitPrice,
+            'promotion_price' => $this->promotionPrice
         ]);
     }
 }

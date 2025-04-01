@@ -8,7 +8,7 @@ class ProductFilter extends ApiFilter {
         'name'=> ['ceq'], 
         'description'=> ['ceq'], 
         'unit_price'=> ['eq', 'gt', 'lt'], 
-        'promotion_price'=> ['eq', 'gt', 'lt'] ,
+        'promotion_price'=> ['eq', 'gt', 'lt', 'gte', 'lte'] ,
         'new'=> ['eq']
     ];
 
@@ -20,7 +20,9 @@ class ProductFilter extends ApiFilter {
     protected $operatorMap = [
         'ceq' => 'like',
         'eq' => '=',
-        'gt' => '>=',
-        'lt' => '<='
+        'gt' => '>',
+        'lt' => '<',
+        'gte' => '>=',
+        'lte' => '<=',
     ];
 }

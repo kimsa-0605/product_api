@@ -25,7 +25,7 @@ class UpdateProductRequest extends FormRequest
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'unitPrice' => 'required|numeric|min:0',
-                'promotionPrice' => 'nullable|numeric|min:0',
+                'promotionPrice' => 'numeric|min:0',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'unit' => 'required|string|max:50',
                 'new' => 'required|boolean'
@@ -34,19 +34,20 @@ class UpdateProductRequest extends FormRequest
            
             return [
                 'name' => 'sometimes|string|max:255',
-                'description' => 'nullable|string',
+                'description' => 'sometimes|string',
                 'unitPrice' => 'sometimes|numeric|min:0',
-                'promotionPrice' => 'nullable|numeric|min:0',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'promotionPrice' => 'sometimes|numeric|min:0',
+                'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'unit' => 'sometimes|string|max:50',
                 'new' => 'sometimes|boolean'
             ];
         }
-    } 
+    }
+
     public function prepareForValidation() {
         $this->merge([
-            'unit_price' => 'unitPrice',
-            'promotion_price' => 'promotionPrice'
+            'unit_price' => $this->unitPrice,
+            'promotion_price' => $this->promotionPrice
         ]);
     }
 }
